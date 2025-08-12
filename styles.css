@@ -1,4 +1,11 @@
-* {
+.formula-bar {
+    background: #f9fbff;
+    border-bottom: 1px solid #dadce0;
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -111,7 +118,7 @@ body {
 .toolbar-section {
     background: #f9fbff;
     border-bottom: 1px solid #dadce0;
-    padding: 8px 24px;
+    padding: 0px 24px;
 }
 
 .toolbar-left {
@@ -120,12 +127,12 @@ body {
 }
 
 .toolbar-btn {
-    padding: 8px 12px;
+    padding: 8px 16px;
     border: none;
     background: transparent;
-    border-radius: 4px;
+    border-radius: 0px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
     color: #3c4043;
     font-weight: 400;
 }
@@ -134,13 +141,81 @@ body {
     background: #f1f3f4;
 }
 
-.formula-bar {
+.formatting-toolbar {
     background: #f9fbff;
     border-bottom: 1px solid #dadce0;
-    padding: 8px 24px;
+    padding: 6px 24px;
     display: flex;
     align-items: center;
     gap: 8px;
+    min-height: 40px;
+}
+
+.toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.format-btn {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 11px;
+    color: #3c4043;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.format-btn:hover {
+    background: #f1f3f4;
+}
+
+.format-btn.bold {
+    font-weight: 700;
+}
+
+.format-btn.italic {
+    font-style: italic;
+}
+
+.format-select {
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 11px;
+    color: #3c4043;
+    background: white;
+    cursor: pointer;
+    min-width: 60px;
+}
+
+.format-select:hover {
+    background: #f8f9fa;
+}
+
+.zoom-select {
+    min-width: 50px;
+}
+
+.font-select {
+    min-width: 80px;
+}
+
+.size-select {
+    min-width: 40px;
+}
+
+.toolbar-separator {
+    width: 1px;
+    height: 20px;
+    background: #dadce0;
+    margin: 0 4px;
 }
 
 .cell-ref {
