@@ -11,13 +11,42 @@ function renderMessages() {
         const row = document.createElement('div');
         row.className = 'sheet-row';
         row.innerHTML = `
-            <div class="row-number">${index + 2}</div>
             <div class="sheet-cell nome">${msg.nome}</div>
             <div class="sheet-cell mensagem">${msg.mensagem}</div>
             <div class="sheet-cell enviar"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
         `;
         container.appendChild(row);
     });
+
+    // Adicionar linhas vazias para preencher a tela
+    for (let i = 0; i < 15; i++) {
+        const row = document.createElement('div');
+        row.className = 'sheet-row';
+        row.innerHTML = `
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+        `;
+        container.appendChild(row);
+    }
 
     // Atualizar stats se existir
     const stats = document.getElementById('stats');
