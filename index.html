@@ -1,14 +1,9 @@
-<div class="formula-bar">
-        <div class="cell-ref">A1</div>
-        <div class="formula-input">
-            <input type="text" placeholder="Digite aqui..." readonly>
-        </div>
-    </div><!DOCTYPE html>
+  </div><!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎉 Aniversário da Carol - Mensagens</title>
+    <title>Aniversário da Carol - Mensagens</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,8 +17,10 @@
         </div>
         <div class="header-actions">
             <div class="share-section">
-                <button class="share-btn">📤 Share</button>
-                <div class="profile-pic">👤</div>
+                <button class="share-btn">Share</button>
+                <div class="profile-pic">
+                    <img src="https://lh3.googleusercontent.com/a/default-user=s32-c" alt="Profile" class="profile-img">
+                </div>
             </div>
         </div>
     </div>
@@ -114,32 +111,44 @@
             <button class="format-btn">⋮</button>
         </div>
     </div>
-        <div class="cell-ref">A1</div>
-        <div class="formula-input">
-            <input type="text" placeholder="Digite aqui..." readonly>
-        </div>
     </div>
 
     <div class="sheets-container">
         <div class="column-headers">
-            <div class="row-number"></div>
             <div class="column-header nome">A</div>
             <div class="column-header mensagem">B</div>
             <div class="column-header enviar">C</div>
+            <div class="column-header">D</div>
+            <div class="column-header">E</div>
+            <div class="column-header">F</div>
+            <div class="column-header">G</div>
+            <div class="column-header">H</div>
+            <div class="column-header">I</div>
+            <div class="column-header">J</div>
+            <div class="column-header">K</div>
+            <div class="column-header">L</div>
         </div>
         
         <!-- Linha 1: Input para nova mensagem -->
-        <div class="sheet-row">
-            <div class="row-number">1</div>
-            <div class="sheet-cell nome">
+        <div class="sheet-row input-row">
+            <div class="sheet-cell nome input-cell">
                 <input type="text" id="newName" placeholder="Seu nome..." class="cell-input">
             </div>
-            <div class="sheet-cell mensagem">
+            <div class="sheet-cell mensagem input-cell">
                 <textarea id="newMessage" placeholder="Sua mensagem de aniversário..." class="cell-input cell-textarea"></textarea>
             </div>
             <div class="sheet-cell enviar">
-                <button class="send-btn" onclick="sendMessage()">🎉 Enviar</button>
+                <button class="send-btn" onclick="sendMessage()">Enviar</button>
             </div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
+            <div class="sheet-cell empty"></div>
         </div>
 
         <div id="messages-container">
