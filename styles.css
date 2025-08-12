@@ -1,11 +1,4 @@
-.formula-bar {
-    background: #f9fbff;
-    border-bottom: 1px solid #dadce0;
-    padding: 8px 24px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}* {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -106,13 +99,22 @@ body {
 .profile-pic {
     width: 32px;
     height: 32px;
-    background: #4285f4;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-size: 14px;
+    overflow: hidden;
+}
+
+.profile-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.sheet-cell.empty {
+    min-width: 100px;
 }
 
 .toolbar-section {
@@ -218,6 +220,15 @@ body {
     margin: 0 4px;
 }
 
+.formula-bar {
+    background: #f9fbff;
+    border-bottom: 1px solid #dadce0;
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .cell-ref {
     width: 60px;
     height: 28px;
@@ -252,6 +263,10 @@ body {
     border-color: transparent;
 }
 
+.formula-input input::placeholder {
+    color: transparent;
+}
+
 .sheets-container {
     background: white;
     min-height: calc(100vh - 120px);
@@ -264,21 +279,6 @@ body {
     position: sticky;
     top: 0;
     z-index: 10;
-}
-
-.row-number {
-    width: 50px;
-    min-width: 50px;
-    height: 21px;
-    background: #f8f9fa;
-    border-right: 1px solid #dadce0;
-    border-bottom: 1px solid #dadce0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    color: #5f6368;
-    font-weight: 400;
 }
 
 .column-header {
@@ -325,7 +325,8 @@ body {
 
 .cell-textarea {
     resize: none;
-    height: 40px;
+    min-height: 40px;
+    height: auto;
     overflow-y: auto;
 }
 
