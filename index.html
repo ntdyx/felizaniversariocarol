@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 Aniversário da Carol - Mensagens</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="sheets-header">
+        <div class="sheets-icon">📋</div>
+        <div class="title-section">
+            <div class="sheets-title">🎉 Aniversário da Carol - Mensagens</div>
+            <div class="title-tags">
+                <span class="tag internal">Internal</span>
+            </div>
+        </div>
+        <div class="header-actions">
+            <div class="share-section">
+                <button class="share-btn">📤 Share</button>
+                <div class="profile-pic">👤</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toolbar-section">
+        <div class="toolbar-left">
+            <button class="toolbar-btn">📄 File</button>
+            <button class="toolbar-btn">✏️ Edit</button>
+            <button class="toolbar-btn">👁️ View</button>
+            <button class="toolbar-btn">📝 Insert</button>
+            <button class="toolbar-btn">🎨 Format</button>
+            <button class="toolbar-btn">📊 Data</button>
+            <button class="toolbar-btn">🔧 Tools</button>
+            <button class="toolbar-btn">🧩 Extensions</button>
+            <button class="toolbar-btn">❓ Help</button>
+        </div>
+    </div>
+
+    <div class="formula-bar">
+        <div class="cell-ref">A1</div>
+        <div class="formula-input">
+            <input type="text" placeholder="Digite aqui..." readonly>
+        </div>
+    </div>
+
+    <div class="sheets-container">
+        <div class="column-headers">
+            <div class="row-number"></div>
+            <div class="column-header nome">A</div>
+            <div class="column-header mensagem">B</div>
+            <div class="column-header enviar">C</div>
+        </div>
+        
+        <!-- Linha 1: Input para nova mensagem -->
+        <div class="sheet-row">
+            <div class="row-number">1</div>
+            <div class="sheet-cell nome">
+                <input type="text" id="newName" placeholder="Seu nome..." class="cell-input">
+            </div>
+            <div class="sheet-cell mensagem">
+                <textarea id="newMessage" placeholder="Sua mensagem de aniversário..." class="cell-input cell-textarea"></textarea>
+            </div>
+            <div class="sheet-cell enviar">
+                <button class="send-btn" onclick="sendMessage()">🎉 Enviar</button>
+            </div>
+        </div>
+
+        <div id="messages-container">
+            <div class="loading">
+                <div class="spinner"></div>
+                Carregando mensagens...
+            </div>
+        </div>
+    </div>
+
+    <div class="stats" id="stats">
+        Carregando estatísticas...
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
