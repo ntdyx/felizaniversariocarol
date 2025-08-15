@@ -4,13 +4,732 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aniversário da Carol - Mensagens</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f8f9fa;
+            overflow-x: auto;
+        }
+
+        /* Header - Responsivo */
+        .sheets-header { 
+            background: #f9fbff; 
+            border-bottom: 1px solid #dadce0; 
+            padding: 8px 16px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            min-height: 60px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .sheets-icon { 
+            width: 32px; 
+            height: 32px; 
+            background: #4ea953; 
+            border-radius: 8px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: white; 
+            font-size: 16px; 
+            margin-right: 8px;
+        }
+
+        .title-section { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            flex: 1; 
+            min-width: 0;
+        }
+
+        .sheets-title { 
+            font-size: 16px; 
+            color: #3c4043; 
+            font-weight: 400;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .title-tags { 
+            display: flex; 
+            gap: 4px; 
+        }
+
+        .tag { 
+            padding: 2px 6px; 
+            border-radius: 8px; 
+            font-size: 10px; 
+            font-weight: 500; 
+        }
+
+        .tag.internal { 
+            background: #fef7e0; 
+            color: #b06000; 
+            border: 1px solid #fdd663; 
+        }
+
+        .header-actions { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+
+        .share-section { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+
+        .share-btn { 
+            background: #1a73e8; 
+            color: white; 
+            border: none; 
+            padding: 6px 16px; 
+            border-radius: 16px; 
+            font-size: 12px; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            gap: 4px; 
+            font-weight: 500; 
+            box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15); 
+        }
+
+        /* Toolbar - Oculto em mobile */
+        .toolbar-section { 
+            background: #f9fbff; 
+            border-bottom: 1px solid #dadce0; 
+            padding: 0px 16px;
+            display: none;
+        }
+
+        .formatting-toolbar { 
+            background: #f9fbff; 
+            border-bottom: 1px solid #dadce0; 
+            padding: 4px 16px; 
+            display: none;
+        }
+
+        /* Container principal */
+        .sheets-container { 
+            background: white; 
+            min-height: calc(100vh - 120px);
+            overflow-x: auto;
+        }
+
+        /* Headers das colunas - Responsivo */
+        .column-headers { 
+            display: flex; 
+            background: #f8f9fa; 
+            position: sticky; 
+            top: 0; 
+            z-index: 10;
+            min-width: 100%;
+        }
+
+        .column-header { 
+            height: 24px; 
+            background: #f8f9fa; 
+            border-right: 1px solid #dadce0; 
+            border-bottom: 1px solid #dadce0; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 10px; 
+            color: #5f6368; 
+            font-weight: 500; 
+            cursor: pointer; 
+            flex-shrink: 0; 
+        }
+
+        .row-number-header, .row-number-cell { 
+            min-width: 30px; 
+            max-width: 30px; 
+        }
+
+        /* Colunas - Responsivo para mobile */
+        .column-header.nome, .sheet-cell.nome { 
+            flex-basis: 120px;
+            min-width: 120px;
+        }
+        .column-header.mensagem, .sheet-cell.mensagem { 
+            flex-basis: 250px;
+            min-width: 250px;
+        }
+        .column-header.enviar, .sheet-cell.enviar { 
+            flex-basis: 80px;
+            min-width: 80px;
+        }
+        .column-header.empty-d, .sheet-cell.empty-d,
+        .column-header.empty-e, .sheet-cell.empty-e,
+        .column-header.empty-f, .sheet-cell.empty-f,
+        .column-header.empty-g, .sheet-cell.empty-g,
+        .column-header.empty-h, .sheet-cell.empty-h,
+        .column-header.empty-i, .sheet-cell.empty-i,
+        .column-header.empty-j, .sheet-cell.empty-j { 
+            flex-basis: 80px;
+            min-width: 80px;
+        }
+
+        .sheet-row { 
+            display: flex;
+            min-width: 100%;
+        }
+
+        .sheet-cell, .row-number-cell {
+            height: 100px;
+            border-right: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 6px;
+            display: flex;
+            flex-shrink: 0;
+            flex-grow: 0;
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+            overflow: auto;
+            font-size: 9px;
+        }
+
+        .row-number-cell { 
+            background: #f8f9fa; 
+            justify-content: center; 
+            align-items: flex-start; 
+            font-size: 9px; 
+            color: #5f6368; 
+            font-weight: 500; 
+        }
+
+        .sheet-cell { 
+            color: #202124; 
+            background: white; 
+            align-items: flex-start; 
+        }
+
+        .sheet-cell.nome { 
+            font-weight: 500; 
+        }
+
+        .sheet-cell.enviar { 
+            align-items: center; 
+            justify-content: center; 
+        }
+
+        .input-cell { 
+            padding: 0; 
+        }
+
+        .cell-input { 
+            width: 100%; 
+            height: 100%; 
+            border: none; 
+            outline: none; 
+            background: transparent; 
+            font-size: 9px; 
+            color: #202124; 
+            font-family: inherit; 
+            padding: 6px; 
+            resize: none; 
+        }
+
+        .send-btn { 
+            background: #1a73e8; 
+            color: white; 
+            border: none; 
+            padding: 6px 12px; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 9px; 
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* Loading e spinner */
+        .loading { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 30px; 
+            font-size: 14px; 
+            color: #5f6368; 
+        }
+
+        .spinner { 
+            width: 16px; 
+            height: 16px; 
+            border: 2px solid #e0e0e0; 
+            border-top: 2px solid #1a73e8; 
+            border-radius: 50%; 
+            animation: spin 1s linear infinite; 
+            margin-right: 8px; 
+        }
+
+        @keyframes spin { 
+            0% { transform: rotate(0deg); } 
+            100% { transform: rotate(360deg); } 
+        }
+
+        /* Player de música - Responsivo */
+        .music-player { 
+            position: fixed; 
+            bottom: 15px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            background: #4ea953; 
+            border-radius: 40px; 
+            z-index: 1000; 
+            box-shadow: 0 6px 24px rgba(78, 169, 83, 0.4); 
+            backdrop-filter: blur(20px); 
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            max-width: calc(100vw - 30px);
+        }
+
+        .player-controls { 
+            display: flex; 
+            align-items: center; 
+            padding: 6px 16px; 
+            gap: 12px; 
+            min-height: 50px; 
+        }
+
+        .control-btn { 
+            background: rgba(255,255,255,0.2); 
+            border: none; 
+            border-radius: 50%; 
+            width: 36px; 
+            height: 36px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            backdrop-filter: blur(10px); 
+            flex-shrink: 0; 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+        }
+
+        .song-info { 
+            color: white; 
+            font-weight: 500; 
+            font-size: 12px; 
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5); 
+            white-space: nowrap; 
+            margin: 0 4px; 
+            max-width: 140px; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+        }
+
+        .volume-control { 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+            flex-shrink: 0; 
+            background: rgba(255, 255, 255, 0.1); 
+            padding: 4px 8px; 
+            border-radius: 20px; 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+
+        .volume-icon { 
+            font-size: 12px; 
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); 
+            color: white;
+        }
+
+        .volume-slider { 
+            width: 60px; 
+            height: 3px; 
+            background: rgba(255,255,255,0.3); 
+            border-radius: 2px; 
+            outline: none; 
+            -webkit-appearance: none; 
+            cursor: pointer; 
+        }
+
+        .volume-slider::-webkit-slider-thumb { 
+            -webkit-appearance: none; 
+            width: 12px; 
+            height: 12px; 
+            background: white; 
+            border-radius: 50%; 
+            cursor: pointer; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+        }
+
+        /* Media Queries para diferentes tamanhos */
+        @media (max-width: 768px) {
+            .sheets-header {
+                padding: 6px 12px;
+                min-height: 50px;
+            }
+
+            .sheets-title {
+                font-size: 14px;
+            }
+
+            .share-btn {
+                padding: 4px 12px;
+                font-size: 11px;
+            }
+
+            .column-header.nome, .sheet-cell.nome { 
+                flex-basis: 100px;
+                min-width: 100px;
+            }
+            .column-header.mensagem, .sheet-cell.mensagem { 
+                flex-basis: 200px;
+                min-width: 200px;
+            }
+            .column-header.enviar, .sheet-cell.enviar { 
+                flex-basis: 70px;
+                min-width: 70px;
+            }
+
+            .sheet-cell, .row-number-cell {
+                height: 80px;
+                padding: 4px;
+                font-size: 8px;
+            }
+
+            .cell-input {
+                font-size: 8px;
+                padding: 4px;
+            }
+
+            .send-btn {
+                padding: 4px 8px;
+                font-size: 8px;
+            }
+
+            .music-player {
+                bottom: 10px;
+                max-width: calc(100vw - 20px);
+            }
+
+            .player-controls {
+                padding: 4px 12px;
+                gap: 8px;
+                min-height: 40px;
+            }
+
+            .control-btn {
+                width: 30px;
+                height: 30px;
+            }
+
+            .song-info {
+                font-size: 10px;
+                max-width: 100px;
+            }
+
+            .volume-control {
+                gap: 4px;
+                padding: 3px 6px;
+            }
+
+            .volume-slider {
+                width: 40px;
+                height: 2px;
+            }
+
+            .volume-slider::-webkit-slider-thumb {
+                width: 10px;
+                height: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sheets-header {
+                padding: 4px 8px;
+                min-height: 45px;
+            }
+
+            .sheets-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 14px;
+                margin-right: 6px;
+            }
+
+            .sheets-title {
+                font-size: 12px;
+            }
+
+            .tag {
+                padding: 1px 4px;
+                font-size: 8px;
+            }
+
+            .share-btn {
+                padding: 3px 8px;
+                font-size: 10px;
+            }
+
+            .column-header.nome, .sheet-cell.nome { 
+                flex-basis: 80px;
+                min-width: 80px;
+            }
+            .column-header.mensagem, .sheet-cell.mensagem { 
+                flex-basis: 180px;
+                min-width: 180px;
+            }
+            .column-header.enviar, .sheet-cell.enviar { 
+                flex-basis: 60px;
+                min-width: 60px;
+            }
+            .column-header.empty-d, .sheet-cell.empty-d,
+            .column-header.empty-e, .sheet-cell.empty-e,
+            .column-header.empty-f, .sheet-cell.empty-f,
+            .column-header.empty-g, .sheet-cell.empty-g,
+            .column-header.empty-h, .sheet-cell.empty-h,
+            .column-header.empty-i, .sheet-cell.empty-i,
+            .column-header.empty-j, .sheet-cell.empty-j { 
+                flex-basis: 60px;
+                min-width: 60px;
+            }
+
+            .sheet-cell, .row-number-cell {
+                height: 70px;
+                padding: 3px;
+                font-size: 7px;
+            }
+
+            .row-number-cell {
+                min-width: 25px;
+                max-width: 25px;
+            }
+
+            .cell-input {
+                font-size: 7px;
+                padding: 3px;
+            }
+
+            .send-btn {
+                padding: 3px 6px;
+                font-size: 7px;
+            }
+
+            .music-player {
+                bottom: 8px;
+                border-radius: 30px;
+            }
+
+            .player-controls {
+                padding: 3px 8px;
+                gap: 6px;
+                min-height: 36px;
+            }
+
+            .control-btn {
+                width: 26px;
+                height: 26px;
+            }
+
+            .song-info {
+                font-size: 9px;
+                max-width: 80px;
+                margin: 0 2px;
+            }
+
+            .volume-control {
+                gap: 3px;
+                padding: 2px 4px;
+            }
+
+            .volume-icon {
+                font-size: 10px;
+            }
+
+            .volume-slider {
+                width: 35px;
+                height: 2px;
+            }
+
+            .volume-slider::-webkit-slider-thumb {
+                width: 8px;
+                height: 8px;
+            }
+        }
+
+        /* Para telas muito pequenas */
+        @media (max-width: 360px) {
+            .title-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
+            }
+
+            .sheets-title {
+                font-size: 11px;
+            }
+
+            .song-info {
+                max-width: 60px;
+                font-size: 8px;
+            }
+
+            .volume-control {
+                display: none; /* Oculta controle de volume em telas muito pequenas */
+            }
+        }
+
+        /* Desktop - Mantém estilos originais */
+        @media (min-width: 769px) {
+            .toolbar-section, .formatting-toolbar {
+                display: block;
+            }
+
+            .toolbar-left { 
+                display: flex; 
+                gap: 0px; 
+            }
+
+            .toolbar-btn { 
+                padding: 8px 16px; 
+                border: none; 
+                background: transparent; 
+                border-radius: 0px; 
+                cursor: pointer; 
+                font-size: 13px; 
+                color: #3c4043; 
+                font-weight: 400; 
+            }
+
+            .formatting-toolbar { 
+                padding: 6px 24px; 
+                display: flex; 
+                align-items: center; 
+                gap: 8px; 
+                min-height: 40px; 
+            }
+
+            .toolbar-group { 
+                display: flex; 
+                align-items: center; 
+                gap: 2px; 
+            }
+
+            .format-btn { 
+                width: 24px; 
+                height: 24px; 
+                border: none; 
+                background: transparent; 
+                border-radius: 2px; 
+                cursor: pointer; 
+                font-size: 11px; 
+                color: #3c4043; 
+                font-weight: 400; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center; 
+            }
+
+            .toolbar-separator { 
+                width: 1px; 
+                height: 20px; 
+                background: #dadce0; 
+                margin: 0 4px; 
+            }
+
+            .format-select { 
+                border: none; 
+                background: transparent; 
+                font-size: 11px; 
+                color: #3c4043; 
+                cursor: pointer; 
+            }
+
+            /* Dimensões desktop originais */
+            .column-header.nome, .sheet-cell.nome { 
+                flex-basis: 150px;
+            }
+            .column-header.mensagem, .sheet-cell.mensagem { 
+                flex-basis: 400px;
+            }
+            .column-header.enviar, .sheet-cell.enviar { 
+                flex-basis: 100px;
+            }
+            .column-header.empty-d, .sheet-cell.empty-d,
+            .column-header.empty-e, .sheet-cell.empty-e,
+            .column-header.empty-f, .sheet-cell.empty-f,
+            .column-header.empty-g, .sheet-cell.empty-g,
+            .column-header.empty-h, .sheet-cell.empty-h,
+            .column-header.empty-i, .sheet-cell.empty-i,
+            .column-header.empty-j, .sheet-cell.empty-j { 
+                flex-basis: 120px;
+            }
+
+            .sheet-cell, .row-number-cell {
+                height: 120px;
+                padding: 8px;
+                font-size: 10px;
+            }
+
+            .row-number-header, .row-number-cell { 
+                min-width: 40px; 
+                max-width: 40px; 
+            }
+
+            .cell-input {
+                font-size: 10px;
+                padding: 8px;
+            }
+
+            .send-btn {
+                padding: 4px 8px;
+                font-size: 10px;
+            }
+        }
+
+        /* Hover effects - apenas desktop */
+        @media (hover: hover) {
+            .share-btn:hover {
+                background: #1557b0;
+            }
+
+            .toolbar-btn:hover {
+                background: #f1f3f4;
+            }
+
+            .format-btn:hover {
+                background: #f1f3f4;
+            }
+
+            .control-btn:hover {
+                background: rgba(255,255,255,0.3);
+                transform: scale(1.05);
+            }
+
+            .send-btn:hover {
+                background: #1557b0;
+            }
+        }
+
+        /* Ajustes para touch */
+        @media (pointer: coarse) {
+            .control-btn, .send-btn {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="sheets-header">
         <div class="sheets-icon">📋</div>
         <div class="title-section">
-            <div class="sheets-title"> Aniversário da Carol - Mensagens</div>
+            <div class="sheets-title">Aniversário da Carol - Mensagens</div>
             <div class="title-tags">
                 <span class="tag internal">Internal</span>
             </div>
@@ -112,6 +831,310 @@
     </div>
 
     <script src="https://www.youtube.com/iframe_api"></script>
-    <script src="script.js"></script>
+    <script>
+        // ==========================================================
+        // CONFIGURAÇÕES GLOBAIS
+        // ==========================================================
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxz01jl5lnynqOg-j_nvEmKTvA_v0mQ5ufMYhnhaiLa4nwLTXJ5eshVT6uyOr-YPhHI0g/exec';
+        const YOUTUBE_VIDEO_ID = 'R36xGZMoz5Q'; // Jorge & Mateus - 50 Reais
+
+        let player;
+        let messages = [];
+        let playerReady = false;
+        let userInteracted = false;
+
+        // ==========================================================
+        // LÓGICA DO PLAYER DE MÚSICA (VERSÃO CORRIGIDA)
+        // ==========================================================
+
+        // Função global obrigatória para a API do YouTube
+        function onYouTubeIframeAPIReady() {
+            console.log("API do YouTube carregada. Inicializando player...");
+            initializePlayer();
+        }
+
+        function initializePlayer() {
+            try {
+                player = new YT.Player('youtube-player', {
+                    height: '1',
+                    width: '1',
+                    videoId: YOUTUBE_VIDEO_ID,
+                    playerVars: {
+                        'autoplay': 0, // MUDANÇA: Não tenta autoplay
+                        'controls': 0,
+                        'loop': 1,
+                        'playlist': YOUTUBE_VIDEO_ID,
+                        'playsinline': 1,
+                        'enablejsapi': 1
+                    },
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange,
+                        'onError': onPlayerError
+                    }
+                });
+            } catch (error) {
+                console.error("Erro ao criar player:", error);
+                // Fallback: mostra mensagem para o usuário
+                updatePlayerUI("❌ Erro ao carregar música");
+            }
+        }
+
+        function onPlayerReady(event) {
+            console.log("Player pronto!");
+            playerReady = true;
+            updatePlayerUI("🎵 Clique para tocar");
+            
+            // Se o usuário já interagiu, tenta tocar
+            if (userInteracted) {
+                startMusic();
+            }
+        }
+
+        function onPlayerStateChange(event) {
+            const playIcon = document.querySelector('.play-icon');
+            const pauseIcon = document.querySelector('.pause-icon');
+            
+            if (event.data === YT.PlayerState.PLAYING) {
+                if (pauseIcon && playIcon) {
+                    pauseIcon.style.display = 'inline';
+                    playIcon.style.display = 'none';
+                }
+                updatePlayerUI("🎵 Tocando...");
+            } else if (event.data === YT.PlayerState.PAUSED) {
+                if (pauseIcon && playIcon) {
+                    playIcon.style.display = 'inline';
+                    pauseIcon.style.display = 'none';
+                }
+                updatePlayerUI("⏸️ Pausado");
+            } else if (event.data === YT.PlayerState.ENDED) {
+                updatePlayerUI("🔄 Repetindo...");
+            }
+        }
+
+        function onPlayerError(event) {
+            console.error("Erro no player:", event.data);
+            updatePlayerUI("❌ Erro na música");
+        }
+
+        function updatePlayerUI(message) {
+            const songInfo = document.querySelector('.song-title');
+            if (songInfo) {
+                songInfo.textContent = message;
+            }
+        }
+
+        // NOVA FUNÇÃO: Inicia a música após interação do usuário
+        function startMusic() {
+            if (!playerReady || !player) {
+                console.log("Player não está pronto ainda");
+                return;
+            }
+            
+            try {
+                console.log("Iniciando música...");
+                player.unMute();
+                player.setVolume(50);
+                player.playVideo();
+                
+                // Atualiza o slider de volume
+                const volumeSlider = document.getElementById('volumeSlider');
+                if (volumeSlider) {
+                    volumeSlider.value = 50;
+                }
+            } catch (error) {
+                console.error("Erro ao iniciar música:", error);
+                updatePlayerUI("❌ Erro ao tocar");
+            }
+        }
+
+        // NOVA FUNÇÃO: Gerencia primeira interação do usuário
+        function handleFirstInteraction() {
+            if (userInteracted) return;
+            
+            userInteracted = true;
+            console.log("Primeira interação detectada!");
+            
+            if (playerReady) {
+                startMusic();
+            }
+            
+            // Remove todos os listeners de primeira interação
+            document.removeEventListener('click', handleFirstInteraction);
+            document.removeEventListener('touchstart', handleFirstInteraction);
+            document.removeEventListener('keydown', handleFirstInteraction);
+        }
+
+        function togglePlayPause() {
+            if (!playerReady || !player) {
+                console.log("Player não está disponível");
+                return;
+            }
+            
+            // Garante que a primeira interação foi registrada
+            handleFirstInteraction();
+            
+            try {
+                const playerState = player.getPlayerState();
+                if (playerState === YT.PlayerState.PLAYING) {
+                    player.pauseVideo();
+                } else {
+                    player.playVideo();
+                }
+            } catch (error) {
+                console.error("Erro no play/pause:", error);
+            }
+        }
+
+        function updateVolume(volume) {
+            // Garante que a primeira interação foi registrada
+            handleFirstInteraction();
+            
+            if (playerReady && player) {
+                try {
+                    player.setVolume(volume);
+                } catch (error) {
+                    console.error("Erro ao ajustar volume:", error);
+                }
+            }
+        }
+
+        // ==========================================================
+        // LÓGICA DA PLANILHA (sem alterações)
+        // ==========================================================
+        async function loadMessages() {
+            try {
+                const container = document.getElementById('messages-container');
+                container.innerHTML = '<div class="loading"><div class="spinner"></div>Carregando mensagens...</div>';
+                const response = await fetch(SCRIPT_URL);
+                const result = await response.json();
+                if (result.success) {
+                    messages = result.data;
+                    renderMessages();
+                } else {
+                    throw new Error(result.error || 'Erro desconhecido');
+                }
+            } catch (error) {
+                console.error('Erro ao carregar mensagens:', error);
+                document.getElementById('messages-container').innerHTML = '<div class="loading">❌ Erro ao carregar mensagens. Tente novamente.</div>';
+            }
+        }
+
+        function renderMessages() {
+            const container = document.getElementById('messages-container');
+            container.innerHTML = '';
+            const totalMinRows = 30;
+
+            messages.forEach((msg, index) => {
+                const row = document.createElement('div');
+                row.className = 'sheet-row';
+                const rowNum = index + 2;
+                row.innerHTML = `<div class="row-number-cell">${rowNum}</div><div class="sheet-cell nome">${msg.nome || ''}</div><div class="sheet-cell mensagem">${msg.mensagem || ''}</div><div class="sheet-cell enviar"></div><div class="sheet-cell empty-d"></div><div class="sheet-cell empty-e"></div><div class="sheet-cell empty-f"></div><div class="sheet-cell empty-g"></div><div class="sheet-cell empty-h"></div><div class="sheet-cell empty-i"></div><div class="sheet-cell empty-j"></div>`;
+                container.appendChild(row);
+            });
+
+            const rowsToAdd = Math.max(0, totalMinRows - messages.length);
+            const startingRowNumber = messages.length + 2;
+
+            for (let i = 0; i < rowsToAdd; i++) {
+                const row = document.createElement('div');
+                row.className = 'sheet-row';
+                const rowNum = startingRowNumber + i;
+                row.innerHTML = `<div class="row-number-cell">${rowNum}</div><div class="sheet-cell nome"></div><div class="sheet-cell mensagem"></div><div class="sheet-cell enviar"></div><div class="sheet-cell empty-d"></div><div class="sheet-cell empty-e"></div><div class="sheet-cell empty-f"></div><div class="sheet-cell empty-g"></div><div class="sheet-cell empty-h"></div><div class="sheet-cell empty-i"></div><div class="sheet-cell empty-j"></div>`;
+                container.appendChild(row);
+            }
+        }
+
+        async function sendMessage() {
+            const nome = document.getElementById('newName').value.trim();
+            const mensagem = document.getElementById('newMessage').value.trim();
+            if (!nome || !mensagem) {
+                alert('Por favor, preencha seu nome e mensagem!');
+                return;
+            }
+            const sendBtn = document.querySelector('.send-btn');
+            const originalText = sendBtn.innerHTML;
+            sendBtn.innerHTML = '⏳ Enviando...';
+            sendBtn.disabled = true;
+            try {
+                await fetch(SCRIPT_URL, { 
+                    method: 'POST', 
+                    mode: 'no-cors', 
+                    headers: { 'Content-Type': 'application/json' }, 
+                    body: JSON.stringify({ nome, mensagem }) 
+                });
+                document.getElementById('newName').value = '';
+                document.getElementById('newMessage').value = '';
+                setTimeout(loadMessages, 1000);
+                alert('🎉 Mensagem enviada com sucesso! Obrigado por participar do aniversário da Carol!');
+            } catch (error) {
+                console.error('Erro ao enviar mensagem:', error);
+                document.getElementById('newName').value = '';
+                document.getElementById('newMessage').value = '';
+                setTimeout(loadMessages, 1000);
+                alert('🎉 Mensagem enviada! (Ignorando erro de CORS)');
+            } finally {
+                sendBtn.innerHTML = originalText;
+                sendBtn.disabled = false;
+            }
+        }
+
+        // ==========================================================
+        // INICIALIZAÇÃO DA PÁGINA (VERSÃO CORRIGIDA)
+        // ==========================================================
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("Página carregada. Configurando eventos...");
+            
+            // Carrega as mensagens
+            loadMessages();
+            
+            // MÚLTIPLOS LISTENERS para capturar primeira interação
+            document.addEventListener('click', handleFirstInteraction, { once: true });
+            document.addEventListener('touchstart', handleFirstInteraction, { once: true });
+            document.addEventListener('keydown', handleFirstInteraction, { once: true });
+            
+            // Listener específico do botão play/pause
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            if (playPauseBtn) {
+                playPauseBtn.addEventListener('click', togglePlayPause);
+            }
+            
+            // Listener do volume slider
+            const volumeSlider = document.getElementById('volumeSlider');
+            if (volumeSlider) {
+                volumeSlider.addEventListener('input', (e) => {
+                    updateVolume(parseInt(e.target.value));
+                });
+            }
+            
+            // Listener para Enter+Ctrl na mensagem
+            const messageInput = document.getElementById('newMessage');
+            if (messageInput) {
+                messageInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' && e.ctrlKey) {
+                        e.preventDefault();
+                        sendMessage();
+                    }
+                });
+            }
+            
+            // Tenta carregar a API do YouTube se ainda não foi carregada
+            if (!window.YT) {
+                console.log("Carregando API do YouTube...");
+                const script = document.createElement('script');
+                script.src = 'https://www.youtube.com/iframe_api';
+                script.onerror = () => {
+                    console.error("Falha ao carregar API do YouTube");
+                    updatePlayerUI("❌ Erro ao carregar YouTube");
+                };
+                document.head.appendChild(script);
+            } else if (window.YT && window.YT.Player) {
+                // API já carregada, inicializa direto
+                console.log("API do YouTube já disponível");
+                initializePlayer();
+            }
+        });
+    </script>
 </body>
 </html>
