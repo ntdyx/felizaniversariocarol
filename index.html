@@ -1,4 +1,4 @@
-  </div><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -40,81 +40,26 @@
     </div>
 
     <div class="formatting-toolbar">
-        <div class="toolbar-group">
-            <button class="format-btn">🔍</button>
-            <button class="format-btn">↶</button>
-            <button class="format-btn">↷</button>
-            <button class="format-btn">🖨️</button>
-            <button class="format-btn">🎨</button>
-        </div>
-        
+        <div class="toolbar-group"><button class="format-btn">🔍</button><button class="format-btn">↶</button><button class="format-btn">↷</button><button class="format-btn">🖨️</button><button class="format-btn">🎨</button></div>
         <div class="toolbar-separator"></div>
-        
-        <div class="toolbar-group">
-            <select class="format-select zoom-select">
-                <option>100%</option>
-            </select>
-        </div>
-        
+        <div class="toolbar-group"><select class="format-select zoom-select"><option>100%</option></select></div>
         <div class="toolbar-separator"></div>
-        
-        <div class="toolbar-group">
-            <button class="format-btn">$</button>
-            <button class="format-btn">%</button>
-            <button class="format-btn">123</button>
-            <button class="format-btn">.0</button>
-            <button class="format-btn">123</button>
-        </div>
-        
+        <div class="toolbar-group"><button class="format-btn">$</button><button class="format-btn">%</button><button class="format-btn">123</button><button class="format-btn">.0</button><button class="format-btn">123</button></div>
         <div class="toolbar-separator"></div>
-        
-        <div class="toolbar-group">
-            <select class="format-select font-select">
-                <option>Default</option>
-            </select>
-        </div>
-        
+        <div class="toolbar-group"><select class="format-select font-select"><option>Default</option></select></div>
         <div class="toolbar-separator"></div>
-        
-        <div class="toolbar-group">
-            <select class="format-select size-select">
-                <option>10</option>
-            </select>
-        </div>
-        
+        <div class="toolbar-group"><select class="format-select size-select"><option>10</option></select></div>
         <div class="toolbar-separator"></div>
-        
-        <div class="toolbar-group">
-            <button class="format-btn bold">B</button>
-            <button class="format-btn italic">I</button>
-            <button class="format-btn">S</button>
-            <button class="format-btn">A</button>
-        </div>
-        
+        <div class="toolbar-group"><button class="format-btn bold">B</button><button class="format-btn italic">I</button><button class="format-btn">S</button><button class="format-btn">A</button></div>
         <div class="toolbar-separator"></div>
-        
-        <div class="toolbar-group">
-            <button class="format-btn">🎨</button>
-            <button class="format-btn">□</button>
-            <button class="format-btn">⚏</button>
-            <button class="format-btn">≡</button>
-            <button class="format-btn">↓</button>
-            <button class="format-btn">🔗</button>
-            <button class="format-btn">📝</button>
-            <button class="format-btn">△</button>
-            <button class="format-btn">⋯</button>
-        </div>
-        
+        <div class="toolbar-group"><button class="format-btn">🎨</button><button class="format-btn">□</button><button class="format-btn">⚏</button><button class="format-btn">≡</button><button class="format-btn">↓</button><button class="format-btn">🔗</button><button class="format-btn">📝</button><button class="format-btn">△</button><button class="format-btn">⋯</button></div>
         <div class="toolbar-separator"></div>
-        
-        <div class="toolbar-group">
-            <button class="format-btn">⋮</button>
-        </div>
-    </div>
+        <div class="toolbar-group"><button class="format-btn">⋮</button></div>
     </div>
 
     <div class="sheets-container">
         <div class="column-headers">
+            <div class="row-number-header"></div>
             <div class="column-header nome">A</div>
             <div class="column-header mensagem">B</div>
             <div class="column-header enviar">C</div>
@@ -123,27 +68,19 @@
             <div class="column-header">F</div>
             <div class="column-header">G</div>
             <div class="column-header">H</div>
-            <div class="column-header">I</div>
-            <div class="column-header">J</div>
-            <div class="column-header">K</div>
-            <div class="column-header">L</div>
         </div>
         
-        <!-- Linha 1: Input para nova mensagem -->
         <div class="sheet-row input-row">
+            <div class="row-number-cell">1</div>
             <div class="sheet-cell nome input-cell">
-                <input type="text" id="newName" placeholder="Seu nome..." class="cell-input">
+                <input type="text" id="newName" placeholder="Seu nome..." class="cell-input" maxlength="20">
             </div>
             <div class="sheet-cell mensagem input-cell">
-                <textarea id="newMessage" placeholder="Sua mensagem de aniversário..." class="cell-input cell-textarea"></textarea>
+                <textarea id="newMessage" placeholder="Sua mensagem de aniversário..." class="cell-input cell-textarea" maxlength="500"></textarea>
             </div>
             <div class="sheet-cell enviar">
                 <button class="send-btn" onclick="sendMessage()">Enviar</button>
             </div>
-            <div class="sheet-cell empty"></div>
-            <div class="sheet-cell empty"></div>
-            <div class="sheet-cell empty"></div>
-            <div class="sheet-cell empty"></div>
             <div class="sheet-cell empty"></div>
             <div class="sheet-cell empty"></div>
             <div class="sheet-cell empty"></div>
@@ -159,10 +96,17 @@
         </div>
     </div>
 
-    <div class="stats" id="stats">
-        Carregando estatísticas...
+    <!-- Player de Música -->
+    <div class="music-player">
+        <div class="player-controls">
+            <button id="playPauseBtn" class="control-btn"><span class="play-icon">▶</span><span class="pause-icon" style="display: none;">⏸</span></button>
+            <div class="song-info"><span class="song-title">Música do Aniversário da Carol</span></div>
+            <div class="volume-control"><span class="volume-icon">♪</span><input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="50"></div>
+        </div>
+        <div id="youtube-player" style="display: none;"></div>
     </div>
 
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="script.js"></script>
 </body>
 </html>
