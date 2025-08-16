@@ -106,6 +106,22 @@
             box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15); 
         }
 
+        .love-chart-btn {
+            background: #ea4335; 
+            color: white; 
+            border: none; 
+            padding: 6px 16px; 
+            border-radius: 16px; 
+            font-size: 12px; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            gap: 4px; 
+            font-weight: 500; 
+            box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+            margin-right: 8px;
+        }
+
         /* Toolbar - Oculto em mobile */
         .toolbar-section { 
             background: #f9fbff; 
@@ -385,6 +401,12 @@
                 font-size: 11px;
             }
 
+            .love-chart-btn {
+                padding: 4px 12px;
+                font-size: 11px;
+                margin-right: 4px;
+            }
+
             .column-header.nome, .sheet-cell.nome { 
                 flex-basis: 100px;
                 min-width: 100px;
@@ -476,6 +498,12 @@
             .share-btn {
                 padding: 3px 8px;
                 font-size: 10px;
+            }
+
+            .love-chart-btn {
+                padding: 3px 8px;
+                font-size: 10px;
+                margin-right: 4px;
             }
 
             .column-header.nome, .sheet-cell.nome { 
@@ -700,6 +728,10 @@
                 background: #1557b0;
             }
 
+            .love-chart-btn:hover {
+                background: #d73925;
+            }
+
             .toolbar-btn:hover {
                 background: #f1f3f4;
             }
@@ -725,23 +757,331 @@
                 min-width: 44px;
             }
         }
+
+        /* Modal do Gráfico de Amor */
+        .love-chart-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            z-index: 2000;
+            backdrop-filter: blur(10px);
+        }
+
+        .love-chart-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 90vw;
+            max-height: 85vh;
+            width: 800px;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: auto;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 16px;
+        }
+
+        .chart-title {
+            font-size: 20px;
+            font-weight: 500;
+            color: #3c4043;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .close-btn {
+            background: #f1f3f4;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            color: #5f6368;
+            transition: all 0.2s ease;
+        }
+
+        .close-btn:hover {
+            background: #e8eaed;
+            transform: scale(1.05);
+        }
+
+        .chart-content {
+            height: 450px;
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #dadce0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+                linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+            background-size: 50px 30px;
+        }
+
+        .chart-bars {
+            position: absolute;
+            bottom: 50px;
+            left: 70px;
+            right: 30px;
+            height: calc(100% - 90px);
+            display: flex;
+            align-items: end;
+            gap: 3px;
+        }
+
+        .chart-bar {
+            background: #ea4335;
+            border-radius: 2px;
+            position: relative;
+            transition: all 0.2s ease;
+            min-width: 12px;
+            flex: 1;
+            max-width: 30px;
+            border: 1px solid #d73925;
+        }
+
+        .chart-bar:hover {
+            background: #d73925;
+            box-shadow: 0 2px 8px rgba(234, 67, 53, 0.3);
+        }
+
+        .chart-bar-value {
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(60, 64, 67, 0.9);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .chart-bar:hover .chart-bar-value {
+            opacity: 1;
+        }
+
+        .chart-y-axis {
+            position: absolute;
+            left: 0;
+            top: 40px;
+            bottom: 50px;
+            width: 60px;
+            display: flex;
+            flex-direction: column-reverse;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-right: 10px;
+        }
+
+        .chart-y-label {
+            font-size: 11px;
+            color: #5f6368;
+            font-weight: 400;
+            transform: translateY(50%);
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+
+        .chart-x-axis {
+            position: absolute;
+            bottom: 0;
+            left: 70px;
+            right: 30px;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #dadce0;
+            background: white;
+        }
+
+        .chart-x-label {
+            font-size: 11px;
+            color: #5f6368;
+            text-align: center;
+            font-weight: 400;
+            font-family: 'Roboto', Arial, sans-serif;
+            transform: rotate(-45deg);
+            transform-origin: center;
+            position: absolute;
+            bottom: 15px;
+        }
+
+        /* KPIs Section */
+        .chart-kpis {
+            margin-top: 20px;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e8eaed;
+        }
+
+        .kpi-section {
+            margin-bottom: 12px;
+        }
+
+        .kpi-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .kpi-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #202124;
+            margin-bottom: 6px;
+        }
+
+        .kpi-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ea4335;
+            margin-bottom: 8px;
+        }
+
+        .kpi-metrics {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .kpi-metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .kpi-label {
+            color: #5f6368;
+        }
+
+        .kpi-number {
+            font-weight: 600;
+            color: #202124;
+        }
+
+        /* Responsivo para modal */
+        @media (max-width: 768px) {
+            .chart-container {
+                padding: 16px;
+                max-width: 95vw;
+                max-height: 90vh;
+            }
+
+            .chart-title {
+                font-size: 18px;
+            }
+
+            .close-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+            }
+
+            .chart-content {
+                height: 300px;
+            }
+
+            .kpi-title {
+                font-size: 12px;
+            }
+
+            .kpi-value {
+                font-size: 12px;
+            }
+
+            .kpi-metric {
+                font-size: 11px;
+            }
+
+            .love-chart-btn {
+                font-size: 10px;
+                padding: 4px 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chart-container {
+                padding: 12px;
+                max-width: 98vw;
+                max-height: 95vh;
+            }
+
+            .chart-title {
+                font-size: 16px;
+            }
+
+            .chart-content {
+                height: 250px;
+            }
+
+            .kpi-title {
+                font-size: 11px;
+            }
+
+            .kpi-value {
+                font-size: 11px;
+            }
+
+            .kpi-metric {
+                font-size: 10px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="sheets-header">
         <div class="sheets-icon">📋</div>
         <div class="title-section">
-            <div class="sheets-title">Aniversário da Carol - Mensagens</div>
+            <div class="sheets-title">Feliz aniversário Carol</div>
             <div class="title-tags">
                 <span class="tag internal">Internal</span>
             </div>
         </div>
         <div class="header-actions">
             <div class="share-section">
+                <button class="love-chart-btn" onclick="openLoveChart()">Gráfico de Amor</button>
                 <button class="share-btn">Share</button>
-                <div class="profile-pic">
-                    <img src="https://lh3.googleusercontent.com/a/default-user=s32-c" alt="Profile" class="profile-img">
-                </div>
+               <div class="profile-pic">
+    <img src="https://i.imgur.com/bAAiRF2.jpeg" alt="Profile" class="profile-img" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+</div>
             </div>
         </div>
     </div>
@@ -822,6 +1162,45 @@
         </div>
     </div>
 
+    <!-- Modal do Gráfico de Amor -->
+    <div id="loveChartModal" class="love-chart-modal">
+        <div class="chart-container">
+            <div class="chart-header">
+                <div class="chart-title">Mensagens de Amor por Dia</div>
+                <button class="close-btn" onclick="closeLoveChart()">×</button>
+            </div>
+            <div class="chart-content">
+                <div class="chart-grid"></div>
+                <div class="chart-y-axis" id="chartYAxis"></div>
+                <div class="chart-bars" id="chartBars"></div>
+                <div class="chart-x-axis" id="chartXAxis"></div>
+            </div>
+            <div class="chart-kpis">
+                <div class="kpi-section">
+                    <div class="kpi-title">Taxa de Crescimento do Sentimento</div>
+                    <div class="kpi-value" id="sentimentGrowth">+∞% em relação ao ano anterior</div>
+                </div>
+                <div class="kpi-section">
+                    <div class="kpi-title">KPIs Relacionais</div>
+                    <div class="kpi-metrics">
+                        <div class="kpi-metric">
+                            <span class="kpi-label">Engajamento diário:</span>
+                            <span class="kpi-number" id="dailyEngagement">0%</span>
+                        </div>
+                        <div class="kpi-metric">
+                            <span class="kpi-label">Retenção afetiva:</span>
+                            <span class="kpi-number">100%</span>
+                        </div>
+                        <div class="kpi-metric">
+                            <span class="kpi-label">Taxa de churn emocional:</span>
+                            <span class="kpi-number">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Player de Música -->
     <div class="music-player">
         <div class="player-controls">
@@ -834,6 +1213,191 @@
 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
+        // ==========================================================
+        // LÓGICA DO GRÁFICO DE AMOR
+        // ==========================================================
+        
+        function openLoveChart() {
+            const modal = document.getElementById('loveChartModal');
+            modal.classList.add('active');
+            generateLoveChart();
+            
+            // Previne scroll do body quando modal está aberto
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLoveChart() {
+            const modal = document.getElementById('loveChartModal');
+            modal.classList.remove('active');
+            
+            // Restaura scroll do body
+            document.body.style.overflow = 'auto';
+        }
+        
+        function generateLoveChart() {
+            const totalMessages = messages.length;
+            
+            // Agrupa mensagens por data (dia/mês/ano)
+            const messagesByDate = {};
+            
+            // Processa mensagens com timestamp
+            const validMessages = messages.filter(msg => msg.timestamp);
+            
+            if (validMessages.length === 0) {
+                // Fallback: se não há timestamps, usa dados simulados
+                generateFallbackChart();
+                return;
+            }
+            
+            // Agrupa mensagens por data e conta quantas por dia
+            validMessages.forEach(msg => {
+                const date = new Date(msg.timestamp);
+                const dateKey = `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
+                
+                if (!messagesByDate[dateKey]) {
+                    messagesByDate[dateKey] = {
+                        date: dateKey,
+                        timestamp: msg.timestamp,
+                        count: 0
+                    };
+                }
+                messagesByDate[dateKey].count++;
+            });
+            
+            // Converte para array e ordena por data
+            const chartData = Object.values(messagesByDate);
+            chartData.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+            
+            renderChart(chartData, totalMessages);
+            updateStats(chartData, totalMessages);
+        }
+        
+        function generateFallbackChart() {
+            // Fallback case - dados simulados quando não há timestamps
+            const today = new Date();
+            const totalMessages = messages.length;
+            
+            // Simula algumas datas recentes com mensagens
+            const fallbackData = [];
+            for (let i = Math.min(7, totalMessages); i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                
+                const dateKey = `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
+                const count = i === 0 ? Math.max(1, totalMessages - 6) : Math.floor(Math.random() * 3) + 1;
+                
+                fallbackData.push({
+                    date: dateKey,
+                    timestamp: date.toISOString(),
+                    count: count
+                });
+            }
+            
+            renderChart(fallbackData, totalMessages);
+            updateStats(fallbackData, totalMessages);
+        }
+        
+        function renderChart(data, totalMessages) {
+            const barsContainer = document.getElementById('chartBars');
+            const xAxisContainer = document.getElementById('chartXAxis');
+            const yAxisContainer = document.getElementById('chartYAxis');
+            
+            // Limpa containers
+            barsContainer.innerHTML = '';
+            xAxisContainer.innerHTML = '';
+            yAxisContainer.innerHTML = '';
+            
+            if (data.length === 0) {
+                barsContainer.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666; font-size: 14px;">Nenhuma mensagem com timestamp ainda 📅</div>';
+                return;
+            }
+            
+            const maxCount = Math.max(...data.map(d => d.count));
+            
+            // Cria barras (uma para cada dia)
+            data.forEach((item, index) => {
+                const bar = document.createElement('div');
+                bar.className = 'chart-bar';
+                
+                const height = (item.count / maxCount) * 100;
+                bar.style.height = `${height}%`;
+                
+                // Tooltip com informações do dia
+                const tooltip = document.createElement('div');
+                tooltip.className = 'chart-bar-value';
+                tooltip.textContent = `${item.date}: ${item.count} ${item.count === 1 ? 'mensagem' : 'mensagens'}`;
+                bar.appendChild(tooltip);
+                
+                barsContainer.appendChild(bar);
+            });
+            
+            // Cria labels do eixo X (datas)
+            const totalPoints = data.length;
+            const maxLabels = window.innerWidth < 768 ? 3 : Math.min(6, totalPoints);
+            const labelStep = Math.ceil(totalPoints / maxLabels);
+            
+            data.forEach((item, index) => {
+                if (index % labelStep === 0 || index === totalPoints - 1) {
+                    const label = document.createElement('div');
+                    label.className = 'chart-x-label';
+                    
+                    // Formato mais curto para mobile
+                    if (window.innerWidth < 768) {
+                        const dateParts = item.date.split('/');
+                        label.textContent = `${dateParts[0]}/${dateParts[1]}`;
+                    } else {
+                        label.textContent = item.date;
+                    }
+                    
+                    label.style.left = `${(index / (totalPoints - 1)) * 100}%`;
+                    xAxisContainer.appendChild(label);
+                }
+            });
+            
+            // Cria labels do eixo Y (quantidade de mensagens)
+            for (let i = 0; i <= 5; i++) {
+                const value = Math.round((maxCount / 5) * i);
+                const label = document.createElement('div');
+                label.className = 'chart-y-label';
+                label.textContent = value;
+                yAxisContainer.appendChild(label);
+            }
+        }
+        
+        function updateStats(data, totalMessages) {
+            // Taxa de Crescimento do Sentimento - sempre comparar com 0
+            const growthPercentage = totalMessages > 0 ? ((totalMessages - 0) / Math.max(1, 1) * 100).toFixed(0) : '0';
+            document.getElementById('sentimentGrowth').textContent = `+${growthPercentage}% em relação ao ano anterior`;
+            
+            // Engajamento diário
+            if (data.length > 1) {
+                const totalDays = data.length;
+                const avgMessages = (totalMessages / totalDays).toFixed(1);
+                const maxDaily = Math.max(...data.map(d => d.count));
+                const engagementPercent = ((avgMessages / maxDaily) * 100).toFixed(1);
+                document.getElementById('dailyEngagement').textContent = `${engagementPercent}%`;
+            } else {
+                // Se não há outros dias, compare com zero
+                const engagementPercent = totalMessages > 0 ? (totalMessages * 10).toFixed(1) : '0.0';
+                document.getElementById('dailyEngagement').textContent = `${engagementPercent}%`;
+            }
+        }
+        
+        // Fecha modal ao clicar fora
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('loveChartModal');
+            if (e.target === modal) {
+                closeLoveChart();
+            }
+        });
+        
+        // Fecha modal com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLoveChart();
+            }
+        });
+
         // ==========================================================
         // CONFIGURAÇÕES GLOBAIS
         // ==========================================================
@@ -885,7 +1449,7 @@
         function onPlayerReady(event) {
             console.log("Player pronto!");
             playerReady = true;
-            updatePlayerUI("🎵 Clique para tocar");
+            updatePlayerUI("Jesse McCartney - Just So You Know");
             
             // Se o usuário já interagiu, tenta tocar
             if (userInteracted) {
@@ -902,13 +1466,13 @@
                     pauseIcon.style.display = 'inline';
                     playIcon.style.display = 'none';
                 }
-                updatePlayerUI("🎵 Tocando...");
+                updatePlayerUI("Jesse McCartney - Just So You Know");
             } else if (event.data === YT.PlayerState.PAUSED) {
                 if (pauseIcon && playIcon) {
                     playIcon.style.display = 'inline';
                     pauseIcon.style.display = 'none';
                 }
-                updatePlayerUI("⏸️ Pausado");
+                updatePlayerUI("⏸ Pausado");
             } else if (event.data === YT.PlayerState.ENDED) {
                 updatePlayerUI("🔄 Repetindo...");
             }
@@ -1031,7 +1595,21 @@
                 const row = document.createElement('div');
                 row.className = 'sheet-row';
                 const rowNum = index + 2;
-                row.innerHTML = `<div class="row-number-cell">${rowNum}</div><div class="sheet-cell nome">${msg.nome || ''}</div><div class="sheet-cell mensagem">${msg.mensagem || ''}</div><div class="sheet-cell enviar"></div><div class="sheet-cell empty-d"></div><div class="sheet-cell empty-e"></div><div class="sheet-cell empty-f"></div><div class="sheet-cell empty-g"></div><div class="sheet-cell empty-h"></div><div class="sheet-cell empty-i"></div><div class="sheet-cell empty-j"></div>`;
+                
+                // Formata timestamp se existir
+                let timestampDisplay = '';
+                if (msg.timestamp) {
+                    const date = new Date(msg.timestamp);
+                    timestampDisplay = date.toLocaleString('pt-BR', {
+                        day: '2-digit',
+                        month: '2-digit', 
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                }
+                
+                row.innerHTML = `<div class="row-number-cell">${rowNum}</div><div class="sheet-cell nome">${msg.nome || ''}</div><div class="sheet-cell mensagem">${msg.mensagem || ''}</div><div class="sheet-cell enviar">${timestampDisplay}</div><div class="sheet-cell empty-d"></div><div class="sheet-cell empty-e"></div><div class="sheet-cell empty-f"></div><div class="sheet-cell empty-g"></div><div class="sheet-cell empty-h"></div><div class="sheet-cell empty-i"></div><div class="sheet-cell empty-j"></div>`;
                 container.appendChild(row);
             });
 
@@ -1068,7 +1646,7 @@
                 document.getElementById('newName').value = '';
                 document.getElementById('newMessage').value = '';
                 setTimeout(loadMessages, 1000);
-                alert('🎉 Mensagem enviada com sucesso! Obrigado por participar do aniversário da Carol!');
+                alert('Mensagem enviada com sucesso! Obrigado por participar!');
             } catch (error) {
                 console.error('Erro ao enviar mensagem:', error);
                 document.getElementById('newName').value = '';
