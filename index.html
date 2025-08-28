@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz aniversário, Carolynne Saphadinne!</title>
+    <title>Aniversário da Carol - Mensagens</title>
     <style>
         * {
             margin: 0;
@@ -15,10 +15,9 @@
             font-family: 'Roboto', Arial, sans-serif;
             background-color: #f8f9fa;
             overflow-x: auto;
-            padding-bottom: 80px; /* Garante espaço para o player em toda a página */
+            padding-bottom: 80px;
         }
 
-        /* Header - Responsivo */
         .sheets-header { 
             background: #f9fbff; 
             border-bottom: 1px solid #dadce0; 
@@ -122,7 +121,6 @@
             margin-right: 8px;
         }
 
-        /* Toolbar - Oculto em mobile */
         .toolbar-section { 
             background: #f9fbff; 
             border-bottom: 1px solid #dadce0; 
@@ -137,15 +135,13 @@
             display: none;
         }
 
-        /* Container principal - Ajuste para player fixo */
         .sheets-container { 
             background: white; 
             min-height: calc(100vh - 120px);
             overflow-x: auto;
-            padding-bottom: 80px; /* Espaço para o player fixo */
+            padding-bottom: 80px;
         }
 
-        /* Headers das colunas - Responsivo */
         .column-headers { 
             display: flex; 
             background: #f8f9fa; 
@@ -175,7 +171,6 @@
             max-width: 30px; 
         }
 
-        /* Colunas - Responsivo para mobile */
         .column-header.nome, .sheet-cell.nome { 
             flex-basis: 120px;
             min-width: 120px;
@@ -271,7 +266,6 @@
             white-space: nowrap;
         }
 
-        /* Loading e spinner */
         .loading { 
             display: flex; 
             align-items: center; 
@@ -296,7 +290,6 @@
             100% { transform: rotate(360deg); } 
         }
 
-        /* Player de música - MELHORADO PARA MOBILE */
         .music-player { 
             position: fixed; 
             bottom: 15px; 
@@ -309,7 +302,7 @@
             backdrop-filter: blur(20px); 
             border: 2px solid rgba(255, 255, 255, 0.2);
             max-width: calc(100vw - 30px);
-            min-width: 300px; /* NOVA: Largura mínima */
+            min-width: 300px;
         }
 
         .player-controls { 
@@ -343,7 +336,7 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.5); 
             white-space: nowrap; 
             margin: 0 4px; 
-            flex: 1; /* NOVA: Ocupa todo espaço disponível */
+            flex: 1;
             overflow: hidden; 
             text-overflow: ellipsis; 
         }
@@ -386,7 +379,6 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.3); 
         }
 
-        /* NOVA: Sistema de Ads */
         .ad-overlay {
             position: fixed;
             top: 0;
@@ -406,7 +398,7 @@
         }
 
         .ad-container {
-            background: white;
+            background: transparent;
             border-radius: 16px;
             padding: 0;
             max-width: 90vw;
@@ -414,6 +406,9 @@
             position: relative;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .ad-close-btn {
@@ -441,14 +436,13 @@
         }
 
         .ad-image {
-            width: 100%;
-            height: auto;
-            max-height: 80vh;
+            max-width: 100%;
+            max-height: 90vh;
             object-fit: contain;
             border-radius: 16px;
+            display: block;
         }
 
-        /* Media Queries para diferentes tamanhos */
         @media (max-width: 768px) {
             .sheets-header {
                 padding: 6px 12px;
@@ -499,21 +493,20 @@
                 font-size: 8px;
             }
 
-            /* MELHOR PLAYER MOBILE */
             .music-player {
                 bottom: 10px;
                 max-width: calc(100vw - 20px);
-                min-width: calc(100vw - 40px); /* NOVA: Player quase full width */
+                min-width: calc(100vw - 40px);
             }
 
             .player-controls {
                 padding: 6px 16px;
                 gap: 10px;
-                min-height: 50px; /* NOVA: Altura maior */
+                min-height: 50px;
             }
 
             .control-btn {
-                width: 40px;  /* NOVA: Botões maiores */
+                width: 40px;
                 height: 40px;
             }
 
@@ -528,7 +521,7 @@
             }
 
             .volume-slider {
-                width: 50px; /* NOVA: Slider maior */
+                width: 50px;
                 height: 3px;
             }
 
@@ -626,21 +619,20 @@
                 font-size: 7px;
             }
 
-            /* PLAYER AINDA MAIOR EM TELAS PEQUENAS */
             .music-player {
                 bottom: 8px;
                 border-radius: 30px;
-                min-width: calc(100vw - 20px); /* NOVA: Player quase full width */
+                min-width: calc(100vw - 20px);
             }
 
             .player-controls {
                 padding: 8px 12px;
                 gap: 8px;
-                min-height: 56px; /* NOVA: Altura maior */
+                min-height: 56px;
             }
 
             .control-btn {
-                width: 44px; /* NOVA: Botões ainda maiores */
+                width: 44px;
                 height: 44px;
             }
 
@@ -669,7 +661,6 @@
             }
         }
 
-        /* Para telas muito pequenas */
         @media (max-width: 360px) {
             .title-section {
                 flex-direction: column;
@@ -686,11 +677,10 @@
             }
 
             .volume-control {
-                display: none; /* Oculta controle de volume em telas muito pequenas */
+                display: none;
             }
         }
 
-        /* Desktop - Mantém estilos originais */
         @media (min-width: 769px) {
             .toolbar-section, .formatting-toolbar {
                 display: block;
@@ -756,7 +746,6 @@
                 cursor: pointer; 
             }
 
-            /* Dimensões desktop originais */
             .column-header.nome, .sheet-cell.nome { 
                 flex-basis: 150px;
             }
@@ -802,7 +791,6 @@
             }
         }
 
-        /* Hover effects - apenas desktop */
         @media (hover: hover) {
             .share-btn:hover {
                 background: #1557b0;
@@ -830,7 +818,6 @@
             }
         }
 
-        /* Ajustes para touch */
         @media (pointer: coarse) {
             .control-btn, .send-btn {
                 min-height: 44px;
@@ -838,7 +825,6 @@
             }
         }
 
-        /* Modal do Gráfico de Amor */
         .love-chart-modal {
             position: fixed;
             top: 0;
@@ -1024,7 +1010,6 @@
             bottom: 15px;
         }
 
-        /* KPIs Section */
         .chart-kpis {
             margin-top: 20px;
             padding: 16px;
@@ -1075,74 +1060,6 @@
         .kpi-number {
             font-weight: 600;
             color: #202124;
-        }
-
-        /* Responsivo para modal */
-        @media (max-width: 768px) {
-            .chart-container {
-                padding: 16px;
-                max-width: 95vw;
-                max-height: 90vh;
-            }
-
-            .chart-title {
-                font-size: 18px;
-            }
-
-            .close-btn {
-                width: 36px;
-                height: 36px;
-                font-size: 18px;
-            }
-
-            .chart-content {
-                height: 300px;
-            }
-
-            .kpi-title {
-                font-size: 12px;
-            }
-
-            .kpi-value {
-                font-size: 12px;
-            }
-
-            .kpi-metric {
-                font-size: 11px;
-            }
-
-            .love-chart-btn {
-                font-size: 10px;
-                padding: 4px 8px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .chart-container {
-                padding: 12px;
-                max-width: 98vw;
-                max-height: 95vh;
-            }
-
-            .chart-title {
-                font-size: 16px;
-            }
-
-            .chart-content {
-                height: 250px;
-            }
-
-            .kpi-title {
-                font-size: 11px;
-            }
-
-            .kpi-value {
-                font-size: 11px;
-            }
-
-            .kpi-metric {
-                font-size: 10px;
-            }
         }
     </style>
 </head>
@@ -1213,7 +1130,6 @@
             <div class="column-header empty-j">J</div>
         </div>
         
-        <!-- Linha 1: Input para nova mensagem -->
         <div class="sheet-row input-row">
             <div class="row-number-cell">1</div>
             <div class="sheet-cell nome input-cell">
@@ -1242,7 +1158,6 @@
         </div>
     </div>
 
-    <!-- Modal do Gráfico de Amor -->
     <div id="loveChartModal" class="love-chart-modal">
         <div class="chart-container">
             <div class="chart-header">
@@ -1257,22 +1172,22 @@
             </div>
             <div class="chart-kpis">
                 <div class="kpi-section">
-                    <div class="kpi-title">Taxa de Crescimento do Sentimento</div>
+                    <div class="kpi-title">Taxa de Crescimento</div>
                     <div class="kpi-value" id="sentimentGrowth">+∞% em relação ao ano anterior</div>
                 </div>
                 <div class="kpi-section">
-                    <div class="kpi-title">KPIs Relacionais</div>
+                    <div class="kpi-title">KPIs 2025</div>
                     <div class="kpi-metrics">
                         <div class="kpi-metric">
                             <span class="kpi-label">Engajamento diário:</span>
                             <span class="kpi-number" id="dailyEngagement">0%</span>
                         </div>
                         <div class="kpi-metric">
-                            <span class="kpi-label">Retenção afetiva:</span>
+                            <span class="kpi-label">Retenção:</span>
                             <span class="kpi-number">100%</span>
                         </div>
                         <div class="kpi-metric">
-                            <span class="kpi-label">Taxa de churn emocional:</span>
+                            <span class="kpi-label">Taxa de churn:</span>
                             <span class="kpi-number">0%</span>
                         </div>
                     </div>
@@ -1281,19 +1196,10 @@
         </div>
     </div>
 
-    <!-- NOVA: Modal de Ads -->
-    <div id="adOverlay" class="ad-overlay">
-        <div class="ad-container">
-            <button class="ad-close-btn" onclick="closeAd()">×</button>
-            <img id="adImage" class="ad-image" src="" alt="Publicidade">
-        </div>
-    </div>
-
-    <!-- Player de Música -->
     <div class="music-player">
         <div class="player-controls">
             <button id="playPauseBtn" class="control-btn"><span class="play-icon">▶</span><span class="pause-icon" style="display: none;">⏸</span></button>
-            <div class="song-info"><span class="song-title">Música do Aniversário da Carol</span></div>
+            <div class="song-info"><span class="song-title">Jesse McCartney - Just So You Know</span></div>
             <div class="volume-control"><span class="volume-icon">♪</span><input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="50"></div>
         </div>
         <div id="youtube-player" style="display: none;"></div>
@@ -1301,123 +1207,151 @@
 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        // ==========================================================
-        // NOVA: SISTEMA DE ADS RANDÔMICOS
-        // ==========================================================
-        
         const AD_IMAGES = [
-            'https://i.imgur.com/Hz9LgEA.jpeg',  // Substitua por suas imagens reais
-            'https://i.imgur.com/JHqeakx.jpeg',  // Substitua por suas imagens reais
-            'https://i.imgur.com/vV2TRg6.jpeg'   // Substitua por suas imagens reais
+            'https://i.imgur.com/vsc5cwc.jpeg',
+            'https://i.imgur.com/9pFcXFe.jpeg',
+            'https://i.imgur.com/uIzCrkj.jpeg',
+            'https://i.imgur.com/wOqZgfc.jpeg',
+            'https://i.imgur.com/Jrbopo9.jpeg'
         ];
         
         let shownAds = [];
         let lastAdTime = 0;
-        const AD_INTERVAL = 30000; // 30 segundos entre ads
+        let activeAds = [];
+        const AD_INTERVAL = 30000;
+        const MAX_SIMULTANEOUS_ADS = 2;
         
         function showRandomAd() {
             const currentTime = Date.now();
             
-            // Se ainda não passou o intervalo, não mostra
             if (currentTime - lastAdTime < AD_INTERVAL) {
                 return;
             }
             
-            // Se já mostrou todos os ads, reseta
+            if (activeAds.length >= MAX_SIMULTANEOUS_ADS) {
+                return;
+            }
+            
             if (shownAds.length >= AD_IMAGES.length) {
                 shownAds = [];
             }
             
-            // Pega ads que ainda não foram mostrados
             const availableAds = AD_IMAGES.filter(ad => !shownAds.includes(ad));
             
             if (availableAds.length === 0) {
                 return;
             }
             
-            // Seleciona um ad aleatório dos disponíveis
-            const randomIndex = Math.floor(Math.random() * availableAds.length);
-            const selectedAd = availableAds[randomIndex];
+            const showMultiple = Math.random() < 0.3 && activeAds.length === 0;
+            const numAdsToShow = showMultiple ? Math.min(2, availableAds.length) : 1;
             
-            // Adiciona na lista de mostrados
-            shownAds.push(selectedAd);
+            for (let i = 0; i < numAdsToShow; i++) {
+                const randomIndex = Math.floor(Math.random() * availableAds.length);
+                const selectedAd = availableAds[randomIndex];
+                
+                availableAds.splice(randomIndex, 1);
+                shownAds.push(selectedAd);
+                createAdOverlay(selectedAd, i);
+            }
+            
             lastAdTime = currentTime;
+        }
+        
+        function createAdOverlay(adImageSrc, index) {
+            const adOverlay = document.createElement('div');
+            adOverlay.className = 'ad-overlay active';
+            adOverlay.id = `adOverlay_${index}_${Date.now()}`;
             
-            // Mostra o ad
-            const adOverlay = document.getElementById('adOverlay');
-            const adImage = document.getElementById('adImage');
+            if (index > 0) {
+                adOverlay.style.transform = `translate(${index * 20}px, ${index * 20}px)`;
+            }
             
-            adImage.src = selectedAd;
-            adOverlay.classList.add('active');
+            adOverlay.innerHTML = `
+                <div class="ad-container">
+                    <button class="ad-close-btn" onclick="closeSpecificAd('${adOverlay.id}')">×</button>
+                    <img class="ad-image" src="${adImageSrc}" alt="Publicidade">
+                </div>
+            `;
             
-            // Previne scroll do body
-            document.body.style.overflow = 'hidden';
+            document.body.appendChild(adOverlay);
+            activeAds.push(adOverlay.id);
             
-            // Auto-close após 8 segundos (opcional)
+            if (activeAds.length === 1) {
+                document.body.style.overflow = 'hidden';
+            }
+            
             setTimeout(() => {
-                if (adOverlay.classList.contains('active')) {
-                    closeAd();
+                closeSpecificAd(adOverlay.id);
+            }, 8000 + (index * 1000));
+        }
+        
+        function closeSpecificAd(adId) {
+            const adOverlay = document.getElementById(adId);
+            if (adOverlay) {
+                adOverlay.remove();
+                
+                const adIndex = activeAds.indexOf(adId);
+                if (adIndex > -1) {
+                    activeAds.splice(adIndex, 1);
                 }
-            }, 8000);
+                
+                if (activeAds.length === 0) {
+                    document.body.style.overflow = 'auto';
+                }
+            }
         }
         
         function closeAd() {
-            const adOverlay = document.getElementById('adOverlay');
-            adOverlay.classList.remove('active');
+            activeAds.forEach(adId => {
+                const adOverlay = document.getElementById(adId);
+                if (adOverlay) {
+                    adOverlay.remove();
+                }
+            });
             
-            // Restaura scroll do body
+            activeAds = [];
             document.body.style.overflow = 'auto';
         }
         
+        window.closeSpecificAd = closeSpecificAd;
+        
         function startAdSystem() {
-            // Primeira chamada após 10 segundos
             setTimeout(showRandomAd, 10000);
             
-            // Depois verifica a cada 15 segundos se pode mostrar um novo ad
             setInterval(() => {
-                // 20% de chance de mostrar ad a cada verificação
                 if (Math.random() < 0.2) {
                     showRandomAd();
                 }
             }, 15000);
             
-            // Ad quando o usuário fica inativo por um tempo
             let inactiveTimer;
             
             function resetInactiveTimer() {
                 clearTimeout(inactiveTimer);
                 inactiveTimer = setTimeout(() => {
                     showRandomAd();
-                }, 45000); // 45 segundos de inatividade
+                }, 45000);
             }
             
-            // Monitora atividade do usuário
             ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
                 document.addEventListener(event, resetInactiveTimer, { passive: true });
             });
             
-            // Inicia o timer de inatividade
             resetInactiveTimer();
         }
         
-        // Fecha ad ao clicar fora (opcional)
         document.addEventListener('click', function(e) {
-            const adOverlay = document.getElementById('adOverlay');
-            if (e.target === adOverlay) {
-                closeAd();
+            if (e.target.classList.contains('ad-overlay')) {
+                const adId = e.target.id;
+                closeSpecificAd(adId);
             }
         });
 
-        // ==========================================================
-        // LÓGICA DO GRÁFICO DE AMOR
-        // ==========================================================
-        
         function openLoveChart() {
             const modal = document.getElementById('loveChartModal');
             modal.classList.add('active');
             generateLoveChart();
             
-            // Previne scroll do body quando modal está aberto
             document.body.style.overflow = 'hidden';
         }
         
@@ -1425,26 +1359,21 @@
             const modal = document.getElementById('loveChartModal');
             modal.classList.remove('active');
             
-            // Restaura scroll do body
             document.body.style.overflow = 'auto';
         }
         
         function generateLoveChart() {
             const totalMessages = messages.length;
             
-            // Agrupa mensagens por data (dia/mês/ano)
             const messagesByDate = {};
             
-            // Processa mensagens com timestamp
             const validMessages = messages.filter(msg => msg.timestamp);
             
             if (validMessages.length === 0) {
-                // Fallback: se não há timestamps, usa dados simulados
                 generateFallbackChart();
                 return;
             }
             
-            // Agrupa mensagens por data e conta quantas por dia
             validMessages.forEach(msg => {
                 const date = new Date(msg.timestamp);
                 const dateKey = `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
@@ -1459,7 +1388,6 @@
                 messagesByDate[dateKey].count++;
             });
             
-            // Converte para array e ordena por data
             const chartData = Object.values(messagesByDate);
             chartData.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
             
@@ -1468,11 +1396,9 @@
         }
         
         function generateFallbackChart() {
-            // Fallback case - dados simulados quando não há timestamps
             const today = new Date();
             const totalMessages = messages.length;
             
-            // Simula algumas datas recentes com mensagens
             const fallbackData = [];
             for (let i = Math.min(7, totalMessages); i >= 0; i--) {
                 const date = new Date(today);
@@ -1497,7 +1423,6 @@
             const xAxisContainer = document.getElementById('chartXAxis');
             const yAxisContainer = document.getElementById('chartYAxis');
             
-            // Limpa containers
             barsContainer.innerHTML = '';
             xAxisContainer.innerHTML = '';
             yAxisContainer.innerHTML = '';
@@ -1509,7 +1434,6 @@
             
             const maxCount = Math.max(...data.map(d => d.count));
             
-            // Cria barras (uma para cada dia)
             data.forEach((item, index) => {
                 const bar = document.createElement('div');
                 bar.className = 'chart-bar';
@@ -1517,7 +1441,6 @@
                 const height = (item.count / maxCount) * 100;
                 bar.style.height = `${height}%`;
                 
-                // Tooltip com informações do dia
                 const tooltip = document.createElement('div');
                 tooltip.className = 'chart-bar-value';
                 tooltip.textContent = `${item.date}: ${item.count} ${item.count === 1 ? 'mensagem' : 'mensagens'}`;
@@ -1526,7 +1449,6 @@
                 barsContainer.appendChild(bar);
             });
             
-            // Cria labels do eixo X (datas)
             const totalPoints = data.length;
             const maxLabels = window.innerWidth < 768 ? 3 : Math.min(6, totalPoints);
             const labelStep = Math.ceil(totalPoints / maxLabels);
@@ -1536,7 +1458,6 @@
                     const label = document.createElement('div');
                     label.className = 'chart-x-label';
                     
-                    // Formato mais curto para mobile
                     if (window.innerWidth < 768) {
                         const dateParts = item.date.split('/');
                         label.textContent = `${dateParts[0]}/${dateParts[1]}`;
@@ -1549,7 +1470,6 @@
                 }
             });
             
-            // Cria labels do eixo Y (quantidade de mensagens)
             for (let i = 0; i <= 5; i++) {
                 const value = Math.round((maxCount / 5) * i);
                 const label = document.createElement('div');
@@ -1560,11 +1480,9 @@
         }
         
         function updateStats(data, totalMessages) {
-            // Taxa de Crescimento do Sentimento - sempre comparar com 0
             const growthPercentage = totalMessages > 0 ? ((totalMessages - 0) / Math.max(1, 1) * 100).toFixed(0) : '0';
             document.getElementById('sentimentGrowth').textContent = `+${growthPercentage}% em relação ao ano anterior`;
             
-            // Engajamento diário
             if (data.length > 1) {
                 const totalDays = data.length;
                 const avgMessages = (totalMessages / totalDays).toFixed(1);
@@ -1572,13 +1490,11 @@
                 const engagementPercent = ((avgMessages / maxDaily) * 100).toFixed(1);
                 document.getElementById('dailyEngagement').textContent = `${engagementPercent}%`;
             } else {
-                // Se não há outros dias, compare com zero
                 const engagementPercent = totalMessages > 0 ? (totalMessages * 10).toFixed(1) : '0.0';
                 document.getElementById('dailyEngagement').textContent = `${engagementPercent}%`;
             }
         }
         
-        // Fecha modal ao clicar fora
         document.addEventListener('click', function(e) {
             const modal = document.getElementById('loveChartModal');
             if (e.target === modal) {
@@ -1586,30 +1502,21 @@
             }
         });
         
-        // Fecha modal com ESC
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeLoveChart();
-                closeAd(); // Também fecha ads com ESC
+                closeAd();
             }
         });
 
-        // ==========================================================
-        // CONFIGURAÇÕES GLOBAIS
-        // ==========================================================
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxz01jl5lnynqOg-j_nvEmKTvA_v0mQ5ufMYhnhaiLa4nwLTXJ5eshVT6uyOr-YPhHI0g/exec';
-        const YOUTUBE_VIDEO_ID = 'R36xGZMoz5Q'; // Jorge & Mateus - 50 Reais
+        const YOUTUBE_VIDEO_ID = 'R36xGZMoz5Q';
 
         let player;
         let messages = [];
         let playerReady = false;
         let userInteracted = false;
 
-        // ==========================================================
-        // LÓGICA DO PLAYER DE MÚSICA (VERSÃO CORRIGIDA)
-        // ==========================================================
-
-        // Função global obrigatória para a API do YouTube
         function onYouTubeIframeAPIReady() {
             console.log("API do YouTube carregada. Inicializando player...");
             initializePlayer();
@@ -1622,7 +1529,7 @@
                     width: '1',
                     videoId: YOUTUBE_VIDEO_ID,
                     playerVars: {
-                        'autoplay': 0, // MUDANÇA: Não tenta autoplay
+                        'autoplay': 0,
                         'controls': 0,
                         'loop': 1,
                         'playlist': YOUTUBE_VIDEO_ID,
@@ -1637,7 +1544,6 @@
                 });
             } catch (error) {
                 console.error("Erro ao criar player:", error);
-                // Fallback: mostra mensagem para o usuário
                 updatePlayerUI("❌ Erro ao carregar música");
             }
         }
@@ -1647,7 +1553,6 @@
             playerReady = true;
             updatePlayerUI("Jesse McCartney - Just So You Know");
             
-            // Se o usuário já interagiu, tenta tocar
             if (userInteracted) {
                 startMusic();
             }
@@ -1686,7 +1591,6 @@
             }
         }
 
-        // NOVA FUNÇÃO: Inicia a música após interação do usuário
         function startMusic() {
             if (!playerReady || !player) {
                 console.log("Player não está pronto ainda");
@@ -1699,7 +1603,6 @@
                 player.setVolume(50);
                 player.playVideo();
                 
-                // Atualiza o slider de volume
                 const volumeSlider = document.getElementById('volumeSlider');
                 if (volumeSlider) {
                     volumeSlider.value = 50;
@@ -1710,7 +1613,6 @@
             }
         }
 
-        // NOVA FUNÇÃO: Gerencia primeira interação do usuário
         function handleFirstInteraction() {
             if (userInteracted) return;
             
@@ -1721,7 +1623,6 @@
                 startMusic();
             }
             
-            // Remove todos os listeners de primeira interação
             document.removeEventListener('click', handleFirstInteraction);
             document.removeEventListener('touchstart', handleFirstInteraction);
             document.removeEventListener('keydown', handleFirstInteraction);
@@ -1733,7 +1634,6 @@
                 return;
             }
             
-            // Garante que a primeira interação foi registrada
             handleFirstInteraction();
             
             try {
@@ -1749,7 +1649,6 @@
         }
 
         function updateVolume(volume) {
-            // Garante que a primeira interação foi registrada
             handleFirstInteraction();
             
             if (playerReady && player) {
@@ -1761,9 +1660,6 @@
             }
         }
 
-        // ==========================================================
-        // LÓGICA DA PLANILHA (sem alterações)
-        // ==========================================================
         async function loadMessages() {
             try {
                 const container = document.getElementById('messages-container');
@@ -1792,7 +1688,6 @@
                 row.className = 'sheet-row';
                 const rowNum = index + 2;
                 
-                // Formata timestamp se existir
                 let timestampDisplay = '';
                 if (msg.timestamp) {
                     const date = new Date(msg.timestamp);
@@ -1842,7 +1737,7 @@
                 document.getElementById('newName').value = '';
                 document.getElementById('newMessage').value = '';
                 setTimeout(loadMessages, 1000);
-                alert('Mensagem enviada com sucesso! Obrigado por participar!');
+                alert('Lead adquirido');
             } catch (error) {
                 console.error('Erro ao enviar mensagem:', error);
                 document.getElementById('newName').value = '';
@@ -1855,31 +1750,21 @@
             }
         }
 
-        // ==========================================================
-        // INICIALIZAÇÃO DA PÁGINA (VERSÃO CORRIGIDA)
-        // ==========================================================
-
         document.addEventListener('DOMContentLoaded', function() {
             console.log("Página carregada. Configurando eventos...");
             
-            // Carrega as mensagens
             loadMessages();
-            
-            // NOVA: Inicia o sistema de ads
             startAdSystem();
             
-            // MÚLTIPLOS LISTENERS para capturar primeira interação
             document.addEventListener('click', handleFirstInteraction, { once: true });
             document.addEventListener('touchstart', handleFirstInteraction, { once: true });
             document.addEventListener('keydown', handleFirstInteraction, { once: true });
             
-            // Listener específico do botão play/pause
             const playPauseBtn = document.getElementById('playPauseBtn');
             if (playPauseBtn) {
                 playPauseBtn.addEventListener('click', togglePlayPause);
             }
             
-            // Listener do volume slider
             const volumeSlider = document.getElementById('volumeSlider');
             if (volumeSlider) {
                 volumeSlider.addEventListener('input', (e) => {
@@ -1887,7 +1772,6 @@
                 });
             }
             
-            // Listener para Enter+Ctrl na mensagem
             const messageInput = document.getElementById('newMessage');
             if (messageInput) {
                 messageInput.addEventListener('keypress', function(e) {
@@ -1898,7 +1782,6 @@
                 });
             }
             
-            // Tenta carregar a API do YouTube se ainda não foi carregada
             if (!window.YT) {
                 console.log("Carregando API do YouTube...");
                 const script = document.createElement('script');
@@ -1909,7 +1792,6 @@
                 };
                 document.head.appendChild(script);
             } else if (window.YT && window.YT.Player) {
-                // API já carregada, inicializa direto
                 console.log("API do YouTube já disponível");
                 initializePlayer();
             }
