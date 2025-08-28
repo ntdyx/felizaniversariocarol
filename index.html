@@ -1172,11 +1172,11 @@
             </div>
             <div class="chart-kpis">
                 <div class="kpi-section">
-                    <div class="kpi-title">Taxa de Crescimento</div>
+                    <div class="kpi-title">Taxa de Crescimento do Sentimento</div>
                     <div class="kpi-value" id="sentimentGrowth">+∞% em relação ao ano anterior</div>
                 </div>
                 <div class="kpi-section">
-                    <div class="kpi-title">KPIs 2025</div>
+                    <div class="kpi-title">KPIs Relacionais</div>
                     <div class="kpi-metrics">
                         <div class="kpi-metric">
                             <span class="kpi-label">Engajamento diário:</span>
@@ -1218,7 +1218,7 @@
         let shownAds = [];
         let lastAdTime = 0;
         let activeAds = [];
-        const AD_INTERVAL = 30000;
+        const AD_INTERVAL = 15000; // Reduzido de 30s para 15s
         const MAX_SIMULTANEOUS_ADS = 2;
         
         function showRandomAd() {
@@ -1316,13 +1316,16 @@
         window.closeSpecificAd = closeSpecificAd;
         
         function startAdSystem() {
-            setTimeout(showRandomAd, 10000);
+            // Primeira chamada após 5 segundos (reduzido de 10s)
+            setTimeout(showRandomAd, 5000);
             
+            // Depois verifica a cada 8 segundos (reduzido de 15s)
             setInterval(() => {
-                if (Math.random() < 0.2) {
+                // 40% de chance de mostrar ad (aumentado de 20%)
+                if (Math.random() < 0.4) {
                     showRandomAd();
                 }
-            }, 15000);
+            }, 8000);
             
             let inactiveTimer;
             
@@ -1330,7 +1333,7 @@
                 clearTimeout(inactiveTimer);
                 inactiveTimer = setTimeout(() => {
                     showRandomAd();
-                }, 45000);
+                }, 25000); // Reduzido de 45s para 25s
             }
             
             ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
@@ -1737,7 +1740,7 @@
                 document.getElementById('newName').value = '';
                 document.getElementById('newMessage').value = '';
                 setTimeout(loadMessages, 1000);
-                alert('Lead adquirido');
+                alert('Mensagem enviada com sucesso! Obrigado por participar!');
             } catch (error) {
                 console.error('Erro ao enviar mensagem:', error);
                 document.getElementById('newName').value = '';
