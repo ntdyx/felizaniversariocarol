@@ -296,7 +296,7 @@
             100% { transform: rotate(360deg); } 
         }
 
-        /* Player de música - Responsivo */
+        /* Player de música - MELHORADO PARA MOBILE */
         .music-player { 
             position: fixed; 
             bottom: 15px; 
@@ -309,6 +309,7 @@
             backdrop-filter: blur(20px); 
             border: 2px solid rgba(255, 255, 255, 0.2);
             max-width: calc(100vw - 30px);
+            min-width: 300px; /* NOVA: Largura mínima */
         }
 
         .player-controls { 
@@ -342,7 +343,7 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.5); 
             white-space: nowrap; 
             margin: 0 4px; 
-            max-width: 140px; 
+            flex: 1; /* NOVA: Ocupa todo espaço disponível */
             overflow: hidden; 
             text-overflow: ellipsis; 
         }
@@ -383,6 +384,68 @@
             border-radius: 50%; 
             cursor: pointer; 
             box-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+        }
+
+        /* NOVA: Sistema de Ads */
+        .ad-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            z-index: 3000;
+            backdrop-filter: blur(10px);
+        }
+
+        .ad-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ad-container {
+            background: white;
+            border-radius: 16px;
+            padding: 0;
+            max-width: 90vw;
+            max-height: 90vh;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .ad-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 3001;
+            transition: all 0.2s ease;
+        }
+
+        .ad-close-btn:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.1);
+        }
+
+        .ad-image {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 16px;
         }
 
         /* Media Queries para diferentes tamanhos */
@@ -436,40 +499,53 @@
                 font-size: 8px;
             }
 
+            /* MELHOR PLAYER MOBILE */
             .music-player {
                 bottom: 10px;
                 max-width: calc(100vw - 20px);
+                min-width: calc(100vw - 40px); /* NOVA: Player quase full width */
             }
 
             .player-controls {
-                padding: 4px 12px;
-                gap: 8px;
-                min-height: 40px;
+                padding: 6px 16px;
+                gap: 10px;
+                min-height: 50px; /* NOVA: Altura maior */
             }
 
             .control-btn {
-                width: 30px;
-                height: 30px;
+                width: 40px;  /* NOVA: Botões maiores */
+                height: 40px;
             }
 
             .song-info {
-                font-size: 10px;
-                max-width: 100px;
+                font-size: 11px;
+                flex: 1;
             }
 
             .volume-control {
-                gap: 4px;
-                padding: 3px 6px;
+                gap: 6px;
+                padding: 4px 8px;
             }
 
             .volume-slider {
-                width: 40px;
-                height: 2px;
+                width: 50px; /* NOVA: Slider maior */
+                height: 3px;
             }
 
             .volume-slider::-webkit-slider-thumb {
-                width: 10px;
-                height: 10px;
+                width: 12px;
+                height: 12px;
+            }
+
+            .ad-container {
+                max-width: 95vw;
+                max-height: 85vh;
+            }
+
+            .ad-close-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
             }
         }
 
@@ -550,45 +626,46 @@
                 font-size: 7px;
             }
 
+            /* PLAYER AINDA MAIOR EM TELAS PEQUENAS */
             .music-player {
                 bottom: 8px;
                 border-radius: 30px;
+                min-width: calc(100vw - 20px); /* NOVA: Player quase full width */
             }
 
             .player-controls {
-                padding: 3px 8px;
-                gap: 6px;
-                min-height: 36px;
+                padding: 8px 12px;
+                gap: 8px;
+                min-height: 56px; /* NOVA: Altura maior */
             }
 
             .control-btn {
-                width: 26px;
-                height: 26px;
+                width: 44px; /* NOVA: Botões ainda maiores */
+                height: 44px;
             }
 
             .song-info {
-                font-size: 9px;
-                max-width: 80px;
-                margin: 0 2px;
+                font-size: 10px;
+                margin: 0 4px;
             }
 
             .volume-control {
-                gap: 3px;
-                padding: 2px 4px;
+                gap: 4px;
+                padding: 4px 6px;
             }
 
             .volume-icon {
-                font-size: 10px;
+                font-size: 11px;
             }
 
             .volume-slider {
-                width: 35px;
-                height: 2px;
+                width: 45px;
+                height: 3px;
             }
 
             .volume-slider::-webkit-slider-thumb {
-                width: 8px;
-                height: 8px;
+                width: 10px;
+                height: 10px;
             }
         }
 
@@ -605,8 +682,7 @@
             }
 
             .song-info {
-                max-width: 60px;
-                font-size: 8px;
+                font-size: 9px;
             }
 
             .volume-control {
@@ -719,6 +795,10 @@
             .send-btn {
                 padding: 4px 8px;
                 font-size: 10px;
+            }
+
+            .music-player {
+                min-width: 350px;
             }
         }
 
@@ -1201,6 +1281,14 @@
         </div>
     </div>
 
+    <!-- NOVA: Modal de Ads -->
+    <div id="adOverlay" class="ad-overlay">
+        <div class="ad-container">
+            <button class="ad-close-btn" onclick="closeAd()">×</button>
+            <img id="adImage" class="ad-image" src="" alt="Publicidade">
+        </div>
+    </div>
+
     <!-- Player de Música -->
     <div class="music-player">
         <div class="player-controls">
@@ -1213,6 +1301,113 @@
 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
+        // ==========================================================
+        // NOVA: SISTEMA DE ADS RANDÔMICOS
+        // ==========================================================
+        
+        const AD_IMAGES = [
+            'https://i.imgur.com/Hz9LgEA.jpeg',  // Substitua por suas imagens reais
+            'https://i.imgur.com/JHqeakx.jpeg',  // Substitua por suas imagens reais
+            'https://i.imgur.com/vV2TRg6.jpeg'   // Substitua por suas imagens reais
+        ];
+        
+        let shownAds = [];
+        let lastAdTime = 0;
+        const AD_INTERVAL = 30000; // 30 segundos entre ads
+        
+        function showRandomAd() {
+            const currentTime = Date.now();
+            
+            // Se ainda não passou o intervalo, não mostra
+            if (currentTime - lastAdTime < AD_INTERVAL) {
+                return;
+            }
+            
+            // Se já mostrou todos os ads, reseta
+            if (shownAds.length >= AD_IMAGES.length) {
+                shownAds = [];
+            }
+            
+            // Pega ads que ainda não foram mostrados
+            const availableAds = AD_IMAGES.filter(ad => !shownAds.includes(ad));
+            
+            if (availableAds.length === 0) {
+                return;
+            }
+            
+            // Seleciona um ad aleatório dos disponíveis
+            const randomIndex = Math.floor(Math.random() * availableAds.length);
+            const selectedAd = availableAds[randomIndex];
+            
+            // Adiciona na lista de mostrados
+            shownAds.push(selectedAd);
+            lastAdTime = currentTime;
+            
+            // Mostra o ad
+            const adOverlay = document.getElementById('adOverlay');
+            const adImage = document.getElementById('adImage');
+            
+            adImage.src = selectedAd;
+            adOverlay.classList.add('active');
+            
+            // Previne scroll do body
+            document.body.style.overflow = 'hidden';
+            
+            // Auto-close após 8 segundos (opcional)
+            setTimeout(() => {
+                if (adOverlay.classList.contains('active')) {
+                    closeAd();
+                }
+            }, 8000);
+        }
+        
+        function closeAd() {
+            const adOverlay = document.getElementById('adOverlay');
+            adOverlay.classList.remove('active');
+            
+            // Restaura scroll do body
+            document.body.style.overflow = 'auto';
+        }
+        
+        function startAdSystem() {
+            // Primeira chamada após 10 segundos
+            setTimeout(showRandomAd, 10000);
+            
+            // Depois verifica a cada 15 segundos se pode mostrar um novo ad
+            setInterval(() => {
+                // 20% de chance de mostrar ad a cada verificação
+                if (Math.random() < 0.2) {
+                    showRandomAd();
+                }
+            }, 15000);
+            
+            // Ad quando o usuário fica inativo por um tempo
+            let inactiveTimer;
+            
+            function resetInactiveTimer() {
+                clearTimeout(inactiveTimer);
+                inactiveTimer = setTimeout(() => {
+                    showRandomAd();
+                }, 45000); // 45 segundos de inatividade
+            }
+            
+            // Monitora atividade do usuário
+            ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
+                document.addEventListener(event, resetInactiveTimer, { passive: true });
+            });
+            
+            // Inicia o timer de inatividade
+            resetInactiveTimer();
+        }
+        
+        // Fecha ad ao clicar fora (opcional)
+        document.addEventListener('click', function(e) {
+            const adOverlay = document.getElementById('adOverlay');
+            if (e.target === adOverlay) {
+                closeAd();
+            }
+        });
+
         // ==========================================================
         // LÓGICA DO GRÁFICO DE AMOR
         // ==========================================================
@@ -1395,6 +1590,7 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeLoveChart();
+                closeAd(); // Também fecha ads com ESC
             }
         });
 
@@ -1668,6 +1864,9 @@
             
             // Carrega as mensagens
             loadMessages();
+            
+            // NOVA: Inicia o sistema de ads
+            startAdSystem();
             
             // MÚLTIPLOS LISTENERS para capturar primeira interação
             document.addEventListener('click', handleFirstInteraction, { once: true });
